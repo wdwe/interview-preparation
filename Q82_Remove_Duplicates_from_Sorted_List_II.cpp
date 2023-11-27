@@ -1,5 +1,5 @@
 
-//Definition for singly-linked list.
+// Definition for singly-linked list.
 struct ListNode {
     int val;
     ListNode *next;
@@ -10,18 +10,37 @@ struct ListNode {
 
 class Solution {
 public:
-    static ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (head == nullptr) return head;
         ListNode *start = new ListNode();
         start->next = head;
-        ListNode *front = start, *back = start;
-        for (int i = 0; i < n + 1; ++i) front = front->next;
-        while(front != nullptr) {
+        ListNode *curr = start, *front = head;
+        int val = front->val;
+        bool dup = false;
+        while (front != nullptr) {
             front = front->next;
-            back = back->next;
+            while (front != nullptr && front->val == val) {
+                dup = true;
+                front = front->next;
+            }
+            // front points to non-repeat pos
+            if (dup) {
+                // delete nodes
+                ListNode *tmp = curr->next;
+                while (tmp != front) {
+                    curr->next = tmp->next;
+                    delete tmp;
+                    tmp = curr->next;
+                }
+//                curr->next = front;
+                dup = false;
+            } else {
+                curr = curr->next;
+            }
+            if (front != nullptr) {
+                val = front->val;
+            }
         }
-        ListNode *tmp = back->next;
-        back->next = tmp->next;
-        delete tmp;
         ListNode *res = start->next;
         delete start;
         return res;
