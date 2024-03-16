@@ -37,48 +37,28 @@ int solution(vector<int> &A) {
 
 // // you can use includes, for example:
 //#include <algorithm>
-//#include <vector>
-// // you can write to stdout for debugging purposes, e.g.
-// // cout << "this is a debug message" << endl;
+//#include <climits>
 //
 //using namespace std;
 //
+// // you can write to stdout for debugging purposes, e.g.
+// // cout << "this is a debug message" << endl;
+//
 //int solution(vector<int> &A) {
 //    // Implement your solution here
-//    int min_num;
-//    int curr = 0;
+//    int curr_sum = A[1];
+//    int curr_min = A[1];
 //    int max_sum = 0;
-//    // init (0, 1, 2)
-//    max_sum = 0;
-//    size_t i = 1;
-//    while (i < A.size() - 1) {
-//        if (A[i] < 0)
-//            i++;
-//        else
-//            break;
-//    }
-//    min_num = A[i];
-//    i++;
-//    while (i < A.size() - 1 ) {
-//        if (A[i] < min_num) {
-//            curr += min_num;
-//            min_num = A[i];
-//        } else {
-//            curr += A[i];
+//    for (size_t i = 2; i < A.size() - 1; ++i) {
+//        if (curr_sum < 0) {
+//            curr_sum = 0;
+//            curr_min = INT_MAX;
 //        }
-//        max_sum = max(max_sum, curr);
-//        if (curr < 0){
-//            while (i < A.size() - 1) {
-//                if (A[i] < 0)
-//                    i++;
-//                else
-//                    break;
-//            }
-//            curr = 0;
-//            min_num = A[i];
-//        }
-//        i++;
+//        curr_min = min(curr_min, A[i]);
+//        curr_sum += A[i];
+//        max_sum = max(curr_sum - curr_min, max_sum);
 //    }
 //    return max_sum;
 //}
+
 
